@@ -8,53 +8,43 @@ import (
 	"os"
 	"path/filepath"
 	"petshop/domain"
-	"petshop/pkg"
 
 	"github.com/BatuhanAlun/godb"
 )
 
-func folderExists(path string) bool {
-	info, err := os.Stat(path)
-	if os.IsNotExist(err) {
-		return false
-	}
-	return info.IsDir()
+// func Init() bool {
+// 	if FolderExists("DB") {
+// 		return true
+// 	} else {
+// 		db := godb.CreateDB("DB", "./")
+// 		users := godb.CreateTable("users")
+// 		db.AddTable(users)
 
-}
+// 		idCol := godb.CreateColumn("id", "int", "PK")
+// 		usernameCol := godb.CreateColumn("username", "string")
+// 		passwordCol := godb.CreateColumn("password", "string")
+// 		userRoleCol := godb.CreateColumn("role", "string")
 
-func Init() bool {
-	if folderExists("DB") {
-		return true
-	} else {
-		db := godb.CreateDB("DB", "./")
-		users := godb.CreateTable("users")
-		db.AddTable(users)
+// 		users.AddColumn(idCol)
+// 		users.AddColumn(usernameCol)
+// 		users.AddColumn(passwordCol)
+// 		users.AddColumn(userRoleCol)
+// 		// adding admin user
+// 		hashedPass := pkg.CreateHash("admin")
+// 		users.AddData([]string{"id", "username", "password", "role"}, []interface{}{0, "admin", hashedPass, "admin"})
 
-		idCol := godb.CreateColumn("id", "int", "PK")
-		usernameCol := godb.CreateColumn("username", "string")
-		passwordCol := godb.CreateColumn("password", "string")
-		userRoleCol := godb.CreateColumn("role", "string")
-
-		users.AddColumn(idCol)
-		users.AddColumn(usernameCol)
-		users.AddColumn(passwordCol)
-		users.AddColumn(userRoleCol)
-		// adding admin user
-		hashedPass := pkg.CreateHash("admin")
-		users.AddData([]string{"id", "username", "password", "role"}, []interface{}{0, "admin", hashedPass, "admin"})
-
-		err := db.SaveDatabaseToFile()
-		if err != nil {
-			return false
-		}
-		return true
-	}
-}
+// 		err := db.SaveDatabaseToFile()
+// 		if err != nil {
+// 			return false
+// 		}
+// 		return true
+// 	}
+// }
 
 func SaveUser(user domain.User) error {
 	var users *godb.Table
 
-	check := Init()
+	check, _ := Init()
 	if !check {
 		return fmt.Errorf("DB Cannot Created!")
 	}
@@ -112,7 +102,7 @@ func getLastID(tablename string) int {
 func IsUserExist(username string) (domain.User, error) {
 	var emptyUser domain.User
 	var userInfo domain.User
-	check := Init()
+	check, _ := Init()
 	if !check {
 		return emptyUser, fmt.Errorf("DB Cannot Created!")
 	}

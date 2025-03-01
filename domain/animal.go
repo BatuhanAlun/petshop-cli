@@ -17,3 +17,5 @@ type Animal struct {
 	OwnerID  int
 	Nickname string
 }
+
+var AnimalTypes []string
