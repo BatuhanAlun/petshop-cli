@@ -1,0 +1,74 @@
+[
+  {
+    "Data": {
+      "id": 0,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$D5Ar6AZwabKQRXnuQIrCsg$ko43SNgtHmy+QOCKlwIbtIb2OvBkaEeRqVIlm0GxrH0",
+      "role": "admin",
+      "username": "admin"
+    }
+  },
+  {
+    "Data": {
+      "id": 0,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$makxxsZFGSti2pqBUg64qA$j695yVYTQLI1pDxHCSVH+v/LlCY5QNNAWyEUK82iItU",
+      "role": "customer",
+      "username": "usr"
+    }
+  },
+  {
+    "Data": {
+      "id": 0,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$GTteq/PtVCcq/4OAxCHXPg$NvFg9V29vBCcsvp4+Xkx9tPR65sYM2zBzsl6a8ZqNWA",
+      "role": "customer",
+      "username": "user"
+    }
+  },
+  {
+    "Data": {
+      "id": 0,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$B8yp5sVdMC4cgDG2dJyCMg$SoO/Ly3msl85uQgfF5u9ajrjtADeVjFJP6Gckyyxy7s",
+      "role": "customer",
+      "username": "pu"
+    }
+  },
+  {
+    "Data": {
+      "id": 1,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$mYEkT+cYtHtGebrZOqtOOA$mSvRZ9yj7sGQ7hygtwybLizr92rrtpN3uf6SSSdWV0Y",
+      "role": "customer",
+      "username": "as"
+    }
+  },
+  {
+    "Data": {
+      "id": 1,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$grTlp2KLqm8I/BBgjIz0oQ$SuUPsOQtKdMJHPSaUhZRHGMMsH/8Zll5GJEJAcjD9AQ",
+      "role": "customer",
+      "username": "sa"
+    }
+  },
+  {
+    "Data": {
+      "id": 1,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$2yyrwXMCp/vwUPtonNFC0Q$CL5MOKMKnzfd+joyJMRYt5VDioxyvTPIbNB/Dc4b4Co",
+      "role": "customer",
+      "username": "asas"
+    }
+  },
+  {
+    "Data": {
+      "id": 2,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$fmvXUpJ541ZRvbxKc9isYQ$K9jj5+xoknpgfzLUeI40F9SweitLJSRM0KzwO0M6Zqk",
+      "role": "customer",
+      "username": "asd"
+    }
+  },
+  {
+    "Data": {
+      "id": 3,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$dSs/oB4mE9zwdxdorzq90A$af9jcDMKF9XYuXdjUDVkqu3A1Sta6wGDe2c8iAr/ykA",
+      "role": "customer",
+      "username": "asdasfd"
+    }
+  }
+]
