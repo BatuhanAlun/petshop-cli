@@ -2,7 +2,8 @@
   {
     "Data": {
       "id": 0,
-      "password": "$argon2id$v=19$m=65536,t=1,p=16$3Vw+5NEqLwAeiHjeuu9gAg$nEWZyI2aa2TJxZNvgR0NeL3fxVgv+Q0rTdeo0MI21QI",
+      "money": 999999,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$CSTXKLcjSGtEI+f2KNiMzg$cgA9pj2rAMfGlOrX1bmprYR91Qo6t06zTI0WtwTluvo",
       "role": "admin",
       "username": "admin"
     }
@@ -10,7 +11,8 @@
   {
     "Data": {
       "id": 1,
-      "password": "$argon2id$v=19$m=65536,t=1,p=16$ovi3HRc+5T4BlurBVwuMWw$+q78qxOMpQD6/mQ9Zr6LO89C/a8PGQ7hHU6t4wirACw",
+      "money": 0,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$TI5+v2n1sFKGeZW0jwNxmg$kXSNMVeHxwVIfLuQz00eJuwPEKu2728eeIXchT58X0k",
       "role": "customer",
       "username": "usr"
     }

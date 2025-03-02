@@ -123,14 +123,16 @@ func Init() (bool, error) {
 		usernameCol := godb.CreateColumn("username", "string")
 		passwordCol := godb.CreateColumn("password", "string")
 		userRoleCol := godb.CreateColumn("role", "string")
+		userMoneyCol := godb.CreateColumn("money", "int")
 
 		users.AddColumn(idCol)
 		users.AddColumn(usernameCol)
 		users.AddColumn(passwordCol)
 		users.AddColumn(userRoleCol)
+		users.AddColumn(userMoneyCol)
 		// adding admin user
 		hashedPass := pkg.CreateHash("admin")
-		users.AddData([]string{"id", "username", "password", "role"}, []interface{}{0, "admin", hashedPass, "admin"})
+		users.AddData([]string{"id", "username", "password", "role", "money"}, []interface{}{0, "admin", hashedPass, "admin", 999999})
 
 		// INIT ANIMALS TABLE
 		animals := godb.CreateTable("animals")

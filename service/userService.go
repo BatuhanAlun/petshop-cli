@@ -9,7 +9,7 @@ import (
 
 func Register(username, password string) error {
 	hashedPass := pkg.CreateHash(password)
-	user := domain.User{Username: username, Password: hashedPass, Role: "customer"}
+	user := domain.User{Username: username, Password: hashedPass, Role: "customer", Money: 0}
 	return database.SaveUser(user)
 }
 

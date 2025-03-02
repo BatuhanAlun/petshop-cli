@@ -54,7 +54,7 @@ func SaveUser(user domain.User) error {
 		}
 	}
 	id := GetLastID("users.json")
-	erer := users.AddData([]string{"id", "username", "password", "role"}, []interface{}{id, user.Username, user.Password, user.Role})
+	erer := users.AddData([]string{"id", "username", "password", "role", "money"}, []interface{}{id, user.Username, user.Password, user.Role, user.Money})
 	if erer != nil {
 		fmt.Println(erer)
 	}
@@ -87,6 +87,7 @@ func IsUserExist(username string) (domain.User, error) {
 					userInfo.Username = val.Data["username"].(string)
 					userInfo.Password = val.Data["password"].(string)
 					userInfo.Role = val.Data["role"].(string)
+					userInfo.Money = int(val.Data["money"].(float64))
 					return userInfo, nil
 				}
 			}
