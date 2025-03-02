@@ -22,3 +22,11 @@ func GetAnimalInfo(id int) (domain.Animal, error) {
 	}
 	return aniInfo, nil
 }
+
+func UpdateAnimal(updateId, newOwnerId int, newName, newType, newNickname string) error {
+	err := database.UpdateAnimal(updateId, newOwnerId, newName, newType, newNickname)
+	if err != nil {
+		return err
+	}
+	return nil
+}

@@ -73,7 +73,8 @@ func main() {
 							}
 
 						case 3:
-							var updateId int
+							var updateId, newOwnerId int
+							var newName, newType, newNickname string
 							fmt.Println("--==--==--Update Animal--==--==--")
 							fmt.Println("Please Type Animal id to Update:")
 							fmt.Scanln(&updateId)
@@ -82,6 +83,30 @@ func main() {
 								fmt.Println(err)
 							}
 							fmt.Println(aniInfo)
+							fmt.Println("Please insert the new values if you don't want to change the value just press Enter!")
+							fmt.Println("Please Type Animal Name to Update:")
+							fmt.Scanln(&newName)
+							fmt.Println("Please Type Animal Type to Update:")
+							fmt.Scanln(&newType)
+							fmt.Println("Please Type Animal Owner id to Update:")
+							_, err = fmt.Scanln(&newOwnerId)
+							if err != nil {
+								newOwnerId = -1
+							}
+							fmt.Println("Please Type Animal Nickname to Update:")
+							fmt.Scanln(&newNickname)
+							err = service.UpdateAnimal(updateId, newOwnerId, newName, newType, newNickname)
+							if err != nil {
+								fmt.Println(err)
+							} else {
+								fmt.Println("Successufly updated!")
+								animal, err := service.GetAnimalInfo(updateId)
+								if err != nil {
+									fmt.Println(err)
+								}
+								fmt.Println(animal)
+							}
+
 						case 4:
 							fmt.Println("--==--==--List Animal--==--==--")
 						}

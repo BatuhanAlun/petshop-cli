@@ -96,3 +96,33 @@ func GetAnimalInfo(id int) (domain.Animal, error) {
 
 	return animalInfo, fmt.Errorf("animal info cannot fetch")
 }
+
+func UpdateAnimal(updateId, newOwnerId int, newName, newType, newNickname string) error {
+	var updatedAnimals *godb.Table
+	db, err := godb.LoadDatabaseFromFile("DB")
+	if err != nil {
+		return err
+	}
+	for index, v := range db.Tables {
+		if v.Name == "animals" {
+			updatedAnimals = db.Tables[index]
+		}
+	}
+	if newOwnerId != -1 {
+		updatedAnimals.Update("id", float64(updateId), "ownerId", newOwnerId)
+	}
+	if newName != "" {
+		updatedAnimals.Update("id", float64(updateId), "name", newName)
+	}
+	if newType != "" {
+		updatedAnimals.Update("id", float64(updateId), "type", newType)
+	}
+	if newNickname != "" {
+		updatedAnimals.Update("id", float64(updateId), "nickname", newNickname)
+	}
+	err = db.SaveDatabaseToFile()
+	if err != nil {
+		return err
+	}
+	return nil
+}
