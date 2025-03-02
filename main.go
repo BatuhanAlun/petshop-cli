@@ -55,12 +55,33 @@ func main() {
 							fmt.Scanln(&name)
 							fmt.Println("Please type your Animals Type:")
 							fmt.Scanln(&animalType)
-							//service.RegisterAnimal(name, animalType)
+							err := service.RegisterAnimal(name, animalType)
+							if err != nil {
+								fmt.Println(err)
+							}
 
 						case 2:
+							var deleteId int
 							fmt.Println("--==--==--Delete Animal--==--==--")
+							fmt.Println("Please Type Animal id to Delete:")
+							fmt.Scanln(&deleteId)
+							err := service.DeleteAnimal(deleteId)
+							if err != nil {
+								fmt.Println(err)
+							} else {
+								fmt.Println("Succesfully deleted")
+							}
+
 						case 3:
+							var updateId int
 							fmt.Println("--==--==--Update Animal--==--==--")
+							fmt.Println("Please Type Animal id to Update:")
+							fmt.Scanln(&updateId)
+							aniInfo, err := service.GetAnimalInfo(updateId)
+							if err != nil {
+								fmt.Println(err)
+							}
+							fmt.Println(aniInfo)
 						case 4:
 							fmt.Println("--==--==--List Animal--==--==--")
 						}

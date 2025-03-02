@@ -1,8 +1,12 @@
 package database
 
 import (
+	"encoding/json"
+	"io"
+	"log"
 	"os"
 	"path/filepath"
+	"petshop/domain"
 	"petshop/pkg"
 
 	"github.com/BatuhanAlun/godb"
@@ -149,4 +153,57 @@ func Init() (bool, error) {
 	}
 
 	return true, nil
+}
+
+func GetLastID(tablename string) int {
+	filePath := filepath.Join("DB", tablename)
+	file, err := os.Open(filePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	bytes, err := io.ReadAll(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var responses []domain.Response
+	if err := json.Unmarshal(bytes, &responses); err != nil {
+		log.Fatal(err)
+	}
+
+	var lastID int
+	for _, response := range responses {
+		if response.Data.ID > lastID {
+			lastID = response.Data.ID
+		}
+	}
+
+	return lastID + 1
+}
+func IsIdExist(tablename string, id int) (bool, error) {
+	filePath := filepath.Join("DB", tablename)
+	file, err := os.Open(filePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	bytes, err := io.ReadAll(file)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var responses []domain.Response
+	if err := json.Unmarshal(bytes, &responses); err != nil {
+		log.Fatal(err)
+	}
+
+	for _, response := range responses {
+		if response.Data.ID == id {
+			return true, nil
+		}
+	}
+	return false, nil
 }

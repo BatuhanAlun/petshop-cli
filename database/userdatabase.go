@@ -1,12 +1,7 @@
 package database
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
-	"log"
-	"os"
-	"path/filepath"
 	"petshop/domain"
 
 	"github.com/BatuhanAlun/godb"
@@ -58,7 +53,7 @@ func SaveUser(user domain.User) error {
 			users = db.Tables[index]
 		}
 	}
-	id := getLastID("users.json")
+	id := GetLastID("users.json")
 	erer := users.AddData([]string{"id", "username", "password", "role"}, []interface{}{id, user.Username, user.Password, user.Role})
 	if erer != nil {
 		fmt.Println(erer)
@@ -69,34 +64,6 @@ func SaveUser(user domain.User) error {
 	}
 
 	return nil
-}
-
-func getLastID(tablename string) int {
-	filePath := filepath.Join("DB", tablename)
-	file, err := os.Open(filePath)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer file.Close()
-
-	bytes, err := io.ReadAll(file)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	var responses []domain.Response
-	if err := json.Unmarshal(bytes, &responses); err != nil {
-		log.Fatal(err)
-	}
-
-	var lastID int
-	for _, response := range responses {
-		if response.Data.ID > lastID {
-			lastID = response.Data.ID
-		}
-	}
-
-	return lastID + 1
 }
 
 func IsUserExist(username string) (domain.User, error) {
