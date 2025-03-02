@@ -11,6 +11,7 @@ type User struct {
 	Username string
 	Password string
 	Role     string
+	Money    int
 }
 
 type Response struct {

@@ -30,3 +30,18 @@ func UpdateAnimal(updateId, newOwnerId int, newName, newType, newNickname string
 	}
 	return nil
 }
+
+func GetAnimals() ([]domain.Animal, error) {
+	var aniInfoSlice []domain.Animal
+	var tempInfo domain.Animal
+	idList, err := database.GetAnimalIdList()
+	if err != nil {
+		return aniInfoSlice, err
+	}
+	for _, v := range idList {
+		tempInfo, _ = GetAnimalInfo(v)
+		aniInfoSlice = append(aniInfoSlice, tempInfo)
+	}
+	return aniInfoSlice, nil
+
+}

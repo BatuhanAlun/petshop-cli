@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"petshop/service"
 )
 
@@ -109,6 +110,11 @@ func main() {
 
 						case 4:
 							fmt.Println("--==--==--List Animal--==--==--")
+							animalList, err := service.GetAnimals()
+							if err != nil {
+								log.Fatal(err)
+							}
+							fmt.Println(animalList)
 						}
 					case 2:
 

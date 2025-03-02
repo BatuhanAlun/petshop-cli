@@ -126,3 +126,20 @@ func UpdateAnimal(updateId, newOwnerId int, newName, newType, newNickname string
 	}
 	return nil
 }
+
+func GetAnimalIdList() ([]int, error) {
+	var idSlice []int
+	db, err := godb.LoadDatabaseFromFile("DB")
+	if err != nil {
+		return nil, err
+	}
+	for _, v := range db.Tables {
+		if v.Name == "animals" {
+			for _, val := range v.Rows {
+				idSlice = append(idSlice, int(val.Data["id"].(float64)))
+			}
+		}
+	}
+	return idSlice, nil
+
+}
