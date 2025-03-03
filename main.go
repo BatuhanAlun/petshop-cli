@@ -114,7 +114,10 @@ func main() {
 							if err != nil {
 								log.Fatal(err)
 							}
-							fmt.Println(animalList)
+							for index, _ := range animalList {
+								fmt.Printf("%d. Animal Info : %v\n", index, animalList[index])
+								fmt.Println("-------------------------------")
+							}
 						}
 					case 2:
 						//User Transactions
@@ -190,6 +193,7 @@ func main() {
 							}
 							for index, _ := range userList {
 								fmt.Printf("%d. User Info : %v\n", index, userList[index])
+								fmt.Println("-------------------------------")
 							}
 
 						}
@@ -217,15 +221,65 @@ func main() {
 							}
 
 						case 2:
+							var deleteId int
+							fmt.Println("--==--==--Delete Item--==--==--")
+							fmt.Println("Please Type Item id to Delete:")
+							fmt.Scanln(&deleteId)
+							err := service.DeleteItem(deleteId)
+							if err != nil {
+								fmt.Println(err)
+							} else {
+								fmt.Println("Succesfully deleted")
+							}
 
 						case 3:
+							var updateId, newCost int
+							var newName string
+							fmt.Println("--==--==--Update Item--==--==--")
+							fmt.Println("Please Type Item id to Update:")
+							fmt.Scanln(&updateId)
+							itemInfo, err := service.GetItemInfo(updateId)
+							if err != nil {
+								fmt.Println(err)
+							}
+							fmt.Println(itemInfo)
+							fmt.Println("Please insert the new values if you don't want to change the value just press Enter!")
+							fmt.Println("Please Type New Item Name to Update:")
+							fmt.Scanln(&newName)
+							fmt.Println("Please Type New Cost of the Item to Update:")
+							_, err = fmt.Scanln(&newCost)
+							if err != nil {
+								newCost = 0
+							}
+							err = service.UpdateItem(updateId, newCost, newName)
+							if err != nil {
+								fmt.Println(err)
+							} else {
+								fmt.Println("Successufly updated!")
+								animal, err := service.GetItemInfo(updateId)
+								if err != nil {
+									fmt.Println(err)
+								}
+								fmt.Println(animal)
+							}
 
 						case 4:
+							fmt.Println("--==--==--List Items--==--==--")
+							itemList, err := service.GetItems()
+							if err != nil {
+								log.Fatal(err)
+							}
+							for index, _ := range itemList {
+								fmt.Printf("%d. Item Info : %v\n", index, itemList[index])
+								fmt.Println("-------------------------------")
+							}
 
 						}
 
 					}
 				}
+			} else if userSessionRole == "customer" {
+
 			}
 
 		case 2:
