@@ -28,3 +28,49 @@ func Login(username, password string) (int, string, error) {
 
 	return userInfo.ID, userInfo.Role, err
 }
+
+// same
+func DeleteCustomer(deleteId int) error {
+	return database.DeleteCustomer(deleteId)
+}
+
+// same
+func GetUserInfo(id int) (domain.User, error) {
+
+	aniInfo, err := database.FetchUserInfoById(id)
+	if err != nil {
+		return aniInfo, err
+	}
+	return aniInfo, nil
+}
+
+func UpdateUser(updateId, newMoney int, newUsername, newPassword string) error {
+	var hashedPass string
+	if newPassword != "" {
+		hashedPass = pkg.CreateHash(newPassword)
+	} else {
+		hashedPass = ""
+	}
+
+	err := database.UpdateUser(updateId, newMoney, newUsername, hashedPass)
+	if err != nil {
+		return err
+	}
+	return nil
+
+}
+
+func GetUsers() ([]domain.User, error) {
+	var usrInfoSlice []domain.User
+	var tempInfo domain.User
+	idList, err := database.GetUserIdList()
+	if err != nil {
+		return usrInfoSlice, err
+	}
+	for _, v := range idList {
+		tempInfo, _ = GetUserInfo(v)
+		usrInfoSlice = append(usrInfoSlice, tempInfo)
+	}
+	return usrInfoSlice, nil
+
+}

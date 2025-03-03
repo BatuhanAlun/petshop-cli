@@ -117,7 +117,82 @@ func main() {
 							fmt.Println(animalList)
 						}
 					case 2:
+						//User Transactions
+						fmt.Println("--==--==--Customer Transactions--==--==--")
+						fmt.Println("1. Add New Customer")
+						fmt.Println("2. Delete Customer")
+						fmt.Println("3. Update Customer")
+						fmt.Println("4. List  Customer")
+						var choice int
+						fmt.Scanln(&choice)
+						switch choice {
+						case 1:
+							var username string
+							var password string
+							fmt.Println("--==--==--Add New Customer--==--==--")
+							fmt.Println("Please Type Customer Username:")
+							fmt.Scanln(&username)
+							fmt.Println("Please type your Customer Password:")
+							fmt.Scanln(&password)
+							err := service.Register(username, password)
+							if err != nil {
+								fmt.Println(err)
+							}
+						case 2:
+							var deleteId int
+							fmt.Println("--==--==--Delete Customer--==--==--")
+							fmt.Println("Please Type Customer id to Delete:")
+							fmt.Scanln(&deleteId)
+							err := service.DeleteCustomer(deleteId)
+							if err != nil {
+								fmt.Println(err)
+							} else {
+								fmt.Println("Succesfully deleted")
+							}
 
+						case 3:
+							var updateId, newMoney int
+							var newUsername, newPassword string
+							fmt.Println("--==--==--Update Customer--==--==--")
+							fmt.Println("Please Type Customer id to Update:")
+							fmt.Scanln(&updateId)
+							usrInfo, err := service.GetUserInfo(updateId)
+							if err != nil {
+								fmt.Println(err)
+							}
+							fmt.Println(usrInfo)
+							fmt.Println("Please insert the new values if you don't want to change the value just press Enter!")
+							fmt.Println("Please Type Username to Update:")
+							fmt.Scanln(&newUsername)
+							fmt.Println("Please Type User Password to Update:")
+							fmt.Scanln(&newPassword)
+							fmt.Println("Please Type User Money to Update:")
+							_, err = fmt.Scanln(&newMoney)
+							if err != nil {
+								newMoney = 0
+							}
+							err = service.UpdateUser(updateId, newMoney, newUsername, newPassword)
+							if err != nil {
+								fmt.Println(err)
+							} else {
+								fmt.Println("Successufly updated!")
+								animal, err := service.GetUserInfo(updateId)
+								if err != nil {
+									fmt.Println(err)
+								}
+								fmt.Println(animal)
+							}
+						case 4:
+							fmt.Println("--==--==--List Users--==--==--")
+							userList, err := service.GetUsers()
+							if err != nil {
+								log.Fatal(err)
+							}
+							for index, _ := range userList {
+								fmt.Printf("%d. User Info : %v\n", index, userList[index])
+							}
+
+						}
 					case 3:
 
 					}
