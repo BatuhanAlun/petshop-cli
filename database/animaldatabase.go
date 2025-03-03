@@ -77,7 +77,7 @@ func GetAnimalInfo(id int) (domain.Animal, error) {
 	if err != nil {
 		return animalInfo, err
 	}
-	//fetching user info in db
+	//fetching animal info in db
 	for _, v := range db.Tables {
 		if v.Name == "animals" {
 			for _, val := range v.Rows {

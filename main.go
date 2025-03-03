@@ -280,6 +280,9 @@ func main() {
 				}
 			} else if userSessionRole == "customer" {
 
+			} else {
+				fmt.Println("User Role Broken")
+				return
 			}
 
 		case 2:

@@ -7,11 +7,13 @@ type IUser interface {
 }
 
 type User struct {
-	ID       int
-	Username string
-	Password string
-	Role     string
-	Money    int
+	ID        int
+	Username  string
+	Password  string
+	Role      string
+	Money     int
+	AnimalIDS []int
+	ItemIDS   []int
 }
 
 type Response struct {
