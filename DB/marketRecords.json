@@ -1,23 +1,23 @@
 [
   {
     "Data": {
-      "cost": 99,
       "id": 1,
-      "name": "iteeam"
+      "itemId": 1,
+      "ownerId": 1
     }
   },
   {
     "Data": {
-      "cost": 199,
       "id": 2,
-      "name": "item2"
+      "itemId": 2,
+      "ownerId": 1
     }
   },
   {
     "Data": {
-      "cost": 100,
       "id": 3,
-      "name": "item1"
+      "itemId": 1,
+      "ownerId": 1
     }
   }
 ]

@@ -74,3 +74,33 @@ func GetUsers() ([]domain.User, error) {
 	return usrInfoSlice, nil
 
 }
+
+func AdoptAnimal(id, userId int) error {
+	err := database.AdoptAnimal(id, userId)
+	return err
+}
+
+func BuyItem(itemId, userId int) error {
+	userInfo, err := GetUserInfo(userId)
+	if err != nil {
+		return err
+	}
+	itemInfo, err := GetItemInfo(itemId)
+	if err != nil {
+		return err
+	}
+	if userInfo.Money < itemInfo.Cost {
+		return fmt.Errorf("User Do not have Enough Money!")
+	}
+	newMoney := userInfo.Money - itemInfo.Cost
+	err = UpdateUser(userId, newMoney, "", "")
+	if err != nil {
+		fmt.Println("buraya giriyo")
+		return err
+	}
+	err = database.BuyItem(itemId, userId)
+	if err != nil {
+		return err
+	}
+	return nil
+}

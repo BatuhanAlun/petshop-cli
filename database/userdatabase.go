@@ -172,7 +172,7 @@ func UpdateUser(updateId, newMoney int, newUsername, newPassword string) error {
 		}
 	}
 	if newMoney != 0 {
-		err = updatedUser.Update("id", float64(updateId), "money", newMoney)
+		err = updatedUser.Update("id", float64(updateId), "money", float64(newMoney))
 		if err != nil {
 			return err
 		}
@@ -207,4 +207,27 @@ func GetUserIdList() ([]int, error) {
 	}
 	return idSlice, nil
 
+}
+
+func BuyItem(itemId, userId int) error {
+	var marketRecord *godb.Table
+	db, err := godb.LoadDatabaseFromFile("DB")
+	if err != nil {
+		return err
+	}
+	for _, v := range db.Tables {
+		if v.Name == "marketRecords" {
+			marketRecord = v
+		}
+	}
+	lastId := GetLastID("marketRecords.json")
+	err = marketRecord.AddData([]string{"id", "ownerId", "itemId"}, []interface{}{lastId, userId, itemId})
+	if err != nil {
+		return err
+	}
+	err = db.SaveDatabaseToFile()
+	if err != nil {
+		return err
+	}
+	return nil
 }

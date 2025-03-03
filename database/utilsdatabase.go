@@ -47,7 +47,7 @@ func checkTables(tableSlice []string) ([]string, bool) {
 }
 
 func Init() (bool, error) {
-	mustKnownTables := []string{"users", "animals"}
+	mustKnownTables := []string{"users", "animals", "market", "marketRecords"}
 	if FolderExists("DB") {
 		missingTables, check := checkTables(mustKnownTables)
 		if check {
@@ -127,6 +127,27 @@ func Init() (bool, error) {
 					if err != nil {
 						return false, err
 					}
+				case "marketRecords":
+					db, err := godb.LoadDatabaseFromFile("DB")
+					if err != nil {
+						return false, err
+					}
+
+					marketRecords := godb.CreateTable("marketRecords")
+					db.AddTable(marketRecords)
+
+					marketRecordId := godb.CreateColumn("id", "int", "PK")
+					recordOwnerId := godb.CreateColumn("ownerId", "int")
+					recordItemId := godb.CreateColumn("itemId", "int")
+
+					marketRecords.AddColumn(marketRecordId)
+					marketRecords.AddColumn(recordOwnerId)
+					marketRecords.AddColumn(recordItemId)
+
+					err = db.SaveDatabaseToFile()
+					if err != nil {
+						return false, err
+					}
 				}
 
 			}
@@ -182,6 +203,18 @@ func Init() (bool, error) {
 		market.AddColumn(itemId)
 		market.AddColumn(itemName)
 		market.AddColumn(itemCost)
+
+		// INIT ItemRecord TABLE
+		marketRecords := godb.CreateTable("marketRecords")
+		db.AddTable(marketRecords)
+
+		marketRecordId := godb.CreateColumn("id", "int", "PK")
+		recordOwnerId := godb.CreateColumn("ownerId", "int")
+		recordItemId := godb.CreateColumn("itemId", "int")
+
+		marketRecords.AddColumn(marketRecordId)
+		marketRecords.AddColumn(recordOwnerId)
+		marketRecords.AddColumn(recordItemId)
 
 		err := db.SaveDatabaseToFile()
 		if err != nil {

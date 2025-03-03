@@ -3,8 +3,8 @@
     "Data": {
       "id": 1,
       "name": "ahmo",
-      "nickname": "noNickNameGiven",
-      "ownerId": -1,
+      "nickname": "ahmis",
+      "ownerId": 1,
       "type": "balik"
     }
   }

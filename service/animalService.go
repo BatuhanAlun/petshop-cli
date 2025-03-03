@@ -45,3 +45,45 @@ func GetAnimals() ([]domain.Animal, error) {
 	return aniInfoSlice, nil
 
 }
+
+func GetNotAdoptedAnimals() ([]domain.Animal, error) {
+	var aniInfoSlice []domain.Animal
+	var tempInfo domain.Animal
+
+	idList, err := database.GetAnimalIdList()
+	if err != nil {
+		return aniInfoSlice, err
+	}
+	for _, v := range idList {
+		tempInfo, _ = GetAnimalInfo(v)
+		if tempInfo.OwnerID == -1 {
+			aniInfoSlice = append(aniInfoSlice, tempInfo)
+		}
+
+	}
+	return aniInfoSlice, nil
+}
+
+func GetOwnedAnimals(ownerId int) ([]domain.Animal, error) {
+	var aniInfoSlice []domain.Animal
+	var tempInfo domain.Animal
+
+	idList, err := database.GetAnimalIdList()
+	if err != nil {
+		return aniInfoSlice, err
+	}
+	for _, v := range idList {
+		tempInfo, _ = GetAnimalInfo(v)
+		if tempInfo.OwnerID == ownerId {
+			aniInfoSlice = append(aniInfoSlice, tempInfo)
+		}
+
+	}
+	return aniInfoSlice, nil
+
+}
+
+func ChangeAnimalNickname(adoptId int, newNick string) error {
+	err := database.GiveNickname(adoptId, newNick)
+	return err
+}

@@ -143,3 +143,43 @@ func GetAnimalIdList() ([]int, error) {
 	return idSlice, nil
 
 }
+
+func AdoptAnimal(animalId, userId int) error {
+	var updatedAnimals *godb.Table
+	db, err := godb.LoadDatabaseFromFile("DB")
+	if err != nil {
+		return err
+	}
+	for index, v := range db.Tables {
+		if v.Name == "animals" {
+			updatedAnimals = db.Tables[index]
+		}
+	}
+	updatedAnimals.Update("id", float64(animalId), "ownerId", float64(userId))
+
+	err = db.SaveDatabaseToFile()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func GiveNickname(adoptId int, newNick string) error {
+	var updatedAnimals *godb.Table
+	db, err := godb.LoadDatabaseFromFile("DB")
+	if err != nil {
+		return err
+	}
+	for index, v := range db.Tables {
+		if v.Name == "animals" {
+			updatedAnimals = db.Tables[index]
+		}
+	}
+	updatedAnimals.Update("id", float64(adoptId), "nickname", newNick)
+
+	err = db.SaveDatabaseToFile()
+	if err != nil {
+		return err
+	}
+	return nil
+}

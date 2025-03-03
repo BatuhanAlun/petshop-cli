@@ -23,8 +23,8 @@ func main() {
 			fmt.Scanln(&username)
 			fmt.Println("Please type your Password:")
 			fmt.Scanln(&password)
-			//userSessionId,
-			_, userSessionRole, err := service.Login(username, password)
+
+			userSessionId, userSessionRole, err := service.Login(username, password)
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -273,13 +273,151 @@ func main() {
 								fmt.Printf("%d. Item Info : %v\n", index, itemList[index])
 								fmt.Println("-------------------------------")
 							}
-
+						case 5:
+							break
 						}
 
 					}
 				}
 			} else if userSessionRole == "customer" {
+				for {
+					fmt.Println("--==--==--Customer Page--==--==--")
+					fmt.Println("1. Animal Page")
+					fmt.Println("2. Market Page")
+					var choice int
+					fmt.Scanln(&choice)
+					switch choice {
+					case 1:
+						fmt.Println("--==--==--Animal Page--==--==--")
+						fmt.Println("1. Adopt an Animal")
+						fmt.Println("2. Give Nickname")
+						fmt.Println("3. List Your Animals")
+						fmt.Println("4. List  All Animals")
+						fmt.Println("5. Return Upper Menu")
+						var choice int
+						fmt.Scanln(&choice)
+						switch choice {
+						case 1:
+							var adoptId int
+							fmt.Println("--==--==--Adopt Animal--==--==--")
+							animalList, err := service.GetNotAdoptedAnimals()
+							if err != nil {
+								log.Fatal(err)
+							}
+							if animalList == nil {
+								fmt.Println("All animals Adopted!")
+								break
+							}
+							for index, _ := range animalList {
+								fmt.Printf("%d. Animal Info : %v\n", index, animalList[index])
+								fmt.Println("-------------------------------")
+							}
+							fmt.Println("Please Type Animal ID You Want to Adopt")
+							fmt.Scanln(&adoptId)
+							err = service.AdoptAnimal(adoptId, userSessionId)
+							if err != nil {
+								fmt.Println(err)
+							}
+							fmt.Println("Succesfull")
+						case 2:
+							var adoptId int
+							var newNick string
+							fmt.Println("--==--==--Give Nick to Animal--==--==--")
+							animalList, err := service.GetOwnedAnimals(userSessionId)
+							if err != nil {
+								log.Fatal(err)
+							}
+							if animalList == nil {
+								fmt.Println("You do not adopted any Animals!!")
+								break
+							}
+							for index, _ := range animalList {
+								fmt.Printf("%d. Animal Info : %v\n", index, animalList[index])
+								fmt.Println("-------------------------------")
+							}
+							fmt.Println("Please Type Animal ID You Want to Change Nickname")
+							fmt.Scanln(&adoptId)
+							fmt.Println("Please Type Animal Nick you Want to Set")
+							fmt.Scanln(&newNick)
+							err = service.ChangeAnimalNickname(adoptId, newNick)
+							if err != nil {
+								fmt.Println(err)
+							}
 
+							fmt.Println("Succesfull")
+
+						case 3:
+							fmt.Println("--==--==--Your Animals--==--==--")
+							animalList, err := service.GetOwnedAnimals(userSessionId)
+							if err != nil {
+								log.Fatal(err)
+							}
+							if animalList == nil {
+								fmt.Println("You do not adopted any Animals!!")
+
+							}
+							for index, _ := range animalList {
+								fmt.Printf("%d. Animal Info : %v\n", index, animalList[index])
+								fmt.Println("-------------------------------")
+							}
+						case 4:
+							fmt.Println("--==--==--All Animals--==--==--")
+							animalList, err := service.GetAnimals()
+							if err != nil {
+								log.Fatal(err)
+							}
+							for index, _ := range animalList {
+								fmt.Printf("%d. Animal Info : %v\n", index, animalList[index])
+								fmt.Println("-------------------------------")
+							}
+
+						case 5:
+							break
+						}
+
+					case 2:
+						fmt.Println("--==--==--Market Page--==--==--")
+						fmt.Println("1. Buy Item")
+						fmt.Println("2. Check Inventory")
+						fmt.Println("3. List Items")
+						var choice int
+						fmt.Scanln(&choice)
+						switch choice {
+
+						case 1:
+							var buyItemId int
+							fmt.Println("--==--==--Buy Menu--==--==--")
+							itemList, err := service.GetItems()
+							if err != nil {
+								log.Fatal(err)
+							}
+							for index, _ := range itemList {
+								fmt.Printf("%d. Item Info : %v\n", index, itemList[index])
+								fmt.Println("-------------------------------")
+							}
+							fmt.Println("Please Type Item id to Buy")
+							fmt.Scanln(&buyItemId)
+							err = service.BuyItem(buyItemId, userSessionId)
+							if err != nil {
+								fmt.Println(err)
+							}
+						case 2:
+
+						case 3:
+							fmt.Println("--==--==--Item List--==--==--")
+							itemList, err := service.GetItems()
+							if err != nil {
+								log.Fatal(err)
+							}
+							for index, _ := range itemList {
+								fmt.Printf("%d. Item Info : %v\n", index, itemList[index])
+								fmt.Println("-------------------------------")
+							}
+						case 4:
+							break
+						}
+					}
+				}
 			} else {
 				fmt.Println("User Role Broken")
 				return
