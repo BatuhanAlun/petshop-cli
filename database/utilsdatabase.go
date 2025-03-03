@@ -106,6 +106,27 @@ func Init() (bool, error) {
 					if err != nil {
 						return false, err
 					}
+
+				case "market":
+					db, err := godb.LoadDatabaseFromFile("DB")
+					if err != nil {
+						return false, err
+					}
+					market := godb.CreateTable("market")
+					db.AddTable(market)
+
+					itemId := godb.CreateColumn("id", "int", "PK")
+					itemName := godb.CreateColumn("name", "string")
+					itemCost := godb.CreateColumn("cost", "int")
+
+					market.AddColumn(itemId)
+					market.AddColumn(itemName)
+					market.AddColumn(itemCost)
+
+					err = db.SaveDatabaseToFile()
+					if err != nil {
+						return false, err
+					}
 				}
 
 			}
@@ -149,6 +170,18 @@ func Init() (bool, error) {
 		animals.AddColumn(animalTypeCol)
 		animals.AddColumn(animalOwnerIdCol)
 		animals.AddColumn(animalNickCol)
+
+		// INIT MARKET TABLE
+		market := godb.CreateTable("market")
+		db.AddTable(market)
+
+		itemId := godb.CreateColumn("id", "int", "PK")
+		itemName := godb.CreateColumn("name", "string")
+		itemCost := godb.CreateColumn("cost", "int")
+
+		market.AddColumn(itemId)
+		market.AddColumn(itemName)
+		market.AddColumn(itemCost)
 
 		err := db.SaveDatabaseToFile()
 		if err != nil {

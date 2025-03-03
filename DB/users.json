@@ -3,45 +3,9 @@
     "Data": {
       "id": 0,
       "money": 999999,
-      "password": "$argon2id$v=19$m=65536,t=1,p=16$CSTXKLcjSGtEI+f2KNiMzg$cgA9pj2rAMfGlOrX1bmprYR91Qo6t06zTI0WtwTluvo",
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$MOYox+rjePaGGzC4Ub4qyw$nra7HgyjR5HCmlZcxc6wkpqe6sAoqdaYo482sN3thDg",
       "role": "admin",
       "username": "admin"
-    }
-  },
-  {
-    "Data": {
-      "id": 1,
-      "money": 0,
-      "password": "$argon2id$v=19$m=65536,t=1,p=16$TI5+v2n1sFKGeZW0jwNxmg$kXSNMVeHxwVIfLuQz00eJuwPEKu2728eeIXchT58X0k",
-      "role": "customer",
-      "username": "usr"
-    }
-  },
-  {
-    "Data": {
-      "id": 2,
-      "money": 0,
-      "password": "$argon2id$v=19$m=65536,t=1,p=16$0MpZYgwfNiptnisv8wf2vA$b4xZTQj3q9MilD7aMBmoD9qk4njHsPuW4bItLi3jdvw",
-      "role": "customer",
-      "username": "adomin"
-    }
-  },
-  {
-    "Data": {
-      "id": 3,
-      "money": 0,
-      "password": "$argon2id$v=19$m=65536,t=1,p=16$17RLLMXHo0FSnR5Oi5K/Gw$+bVVZnPdJqm0U9JhCn+IT+7T4hfIOl1rgFCl0hmbo4I",
-      "role": "customer",
-      "username": "hello3"
-    }
-  },
-  {
-    "Data": {
-      "id": 4,
-      "money": 0,
-      "password": "$argon2id$v=19$m=65536,t=1,p=16$3gv56E62nS/ZXa1SZYD+1g$bQz4nnB0X3SwrQj4D7wvPh6cqwb+xuULUHA64kBH90Q",
-      "role": "customer",
-      "username": "hellobaba"
     }
   }
 ]

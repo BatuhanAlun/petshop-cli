@@ -194,6 +194,35 @@ func main() {
 
 						}
 					case 3:
+						//Market Transactions
+						fmt.Println("--==--==--Market Transactions--==--==--")
+						fmt.Println("1. Add New Item")
+						fmt.Println("2. Delete Item")
+						fmt.Println("3. Update Item")
+						fmt.Println("4. List  Item")
+						var choice int
+						fmt.Scanln(&choice)
+						switch choice {
+						case 1:
+							var iName string
+							var iCost int
+							fmt.Println("--==--==--Add New Item--==--==--")
+							fmt.Println("Please Type Item Name:")
+							fmt.Scanln(&iName)
+							fmt.Println("Please type your Item Cost:")
+							fmt.Scanln(&iCost)
+							err := service.RegisterItem(iName, iCost)
+							if err != nil {
+								fmt.Println(err)
+							}
+
+						case 2:
+
+						case 3:
+
+						case 4:
+
+						}
 
 					}
 				}
