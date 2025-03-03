@@ -284,6 +284,7 @@ func main() {
 					fmt.Println("--==--==--Customer Page--==--==--")
 					fmt.Println("1. Animal Page")
 					fmt.Println("2. Market Page")
+					fmt.Println("3. Add Money Page")
 					var choice int
 					fmt.Scanln(&choice)
 					switch choice {
@@ -402,7 +403,28 @@ func main() {
 								fmt.Println(err)
 							}
 						case 2:
+							fmt.Println("--==--==--Check Inventory--==--==--")
+							var recordPrintList []string
+							itemList, err := service.GetItems()
+							if err != nil {
+								log.Fatal(err)
+							}
+							userRecords, err := service.GetRecords()
+							if err != nil {
+								log.Fatal(err)
+							}
+							for _, v := range userRecords {
+								if v.OwnerID == userSessionId {
+									for index, val := range itemList {
+										if val.ID == v.ItemID {
+											recordPrint := itemList[index].Name
+											recordPrintList = append(recordPrintList, recordPrint)
+										}
+									}
 
+								}
+							}
+							fmt.Println(recordPrintList)
 						case 3:
 							fmt.Println("--==--==--Item List--==--==--")
 							itemList, err := service.GetItems()
@@ -415,6 +437,15 @@ func main() {
 							}
 						case 4:
 							break
+						}
+					case 3:
+						fmt.Println("--==--==--Add Money--==--==--")
+						fmt.Println("Plese Type Amount of Money to Add")
+						var addMoney int
+						fmt.Scanln(&addMoney)
+						err := service.AddMoney(userSessionId, addMoney)
+						if err != nil {
+							fmt.Println(err)
 						}
 					}
 				}

@@ -11,7 +11,7 @@
   {
     "Data": {
       "id": 1,
-      "money": 999602,
+      "money": 999734,
       "password": "$argon2id$v=19$m=65536,t=1,p=16$VYwXDEe/i7o1SceUaiHoEA$ulCVJDzA3DYhVy/sGG5WOZ0YTpEG0w8BcIElE/t4Ugc",
       "role": "customer",
       "username": "ahmet"

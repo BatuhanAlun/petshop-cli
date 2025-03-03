@@ -5,3 +5,9 @@ type Item struct {
 	Name string
 	Cost int
 }
+
+type Records struct {
+	ID      int
+	ItemID  int
+	OwnerID int
+}

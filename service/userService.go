@@ -104,3 +104,7 @@ func BuyItem(itemId, userId int) error {
 	}
 	return nil
 }
+
+func AddMoney(userId, money int) error {
+	return database.AddMoney(userId, money)
+}

@@ -141,3 +141,47 @@ func GetItemIdList() ([]int, error) {
 	return idSlice, nil
 
 }
+
+func GetRecordsIdList() ([]int, error) {
+	var idSlice []int
+	db, err := godb.LoadDatabaseFromFile("DB")
+	if err != nil {
+		return nil, err
+	}
+	for _, v := range db.Tables {
+		if v.Name == "marketRecords" {
+			for _, val := range v.Rows {
+				idSlice = append(idSlice, int(val.Data["id"].(float64)))
+			}
+		}
+	}
+	return idSlice, nil
+
+}
+
+func GetRecordInfo(id int) (domain.Records, error) {
+	var itemInfo domain.Records
+	_, err := IsIdExist("marketRecords.json", id)
+	if err != nil {
+		return itemInfo, err
+	}
+	db, err := godb.LoadDatabaseFromFile("DB")
+	if err != nil {
+		return itemInfo, err
+	}
+	//fetching record info in db
+	for _, v := range db.Tables {
+		if v.Name == "marketRecords" {
+			for _, val := range v.Rows {
+				if int(val.Data["id"].(float64)) == id {
+					itemInfo.ID = int(val.Data["id"].(float64))
+					itemInfo.OwnerID = int(val.Data["ownerId"].(float64))
+					itemInfo.ItemID = int(val.Data["itemId"].(float64))
+					return itemInfo, nil
+				}
+			}
+		}
+	}
+
+	return itemInfo, fmt.Errorf("Record info cannot fetch")
+}

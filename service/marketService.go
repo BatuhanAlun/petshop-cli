@@ -47,3 +47,17 @@ func GetItems() ([]domain.Item, error) {
 	return itemInfoSlice, nil
 
 }
+
+func GetRecords() ([]domain.Records, error) {
+	var recordInfoSlice []domain.Records
+	var tempInfo domain.Records
+	idList, err := database.GetRecordsIdList()
+	if err != nil {
+		return recordInfoSlice, err
+	}
+	for _, v := range idList {
+		tempInfo, _ = database.GetRecordInfo(v)
+		recordInfoSlice = append(recordInfoSlice, tempInfo)
+	}
+	return recordInfoSlice, nil
+}

@@ -231,3 +231,16 @@ func BuyItem(itemId, userId int) error {
 	}
 	return nil
 }
+
+func AddMoney(userId, money int) error {
+	info, err := FetchUserInfoById(userId)
+	if err != nil {
+		return err
+	}
+	info.Money = info.Money + money
+	err = UpdateUser(userId, info.Money, "", "")
+	if err != nil {
+		return err
+	}
+	return nil
+}
