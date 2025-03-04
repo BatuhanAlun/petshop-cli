@@ -1,13 +1,14 @@
 package domain
 
 type IAnimal interface {
-	GetID() int
-	GetName() string
-	SetName(newName string)
-	GetType() string
-	SetType(animalType string)
-	GetOwnerID() int
-	SetOwnerID(ownerID int)
+	RegisterAnimal(name, animalType string) error
+	DeleteAnimal(deleteId int) error
+	GetAnimalInfo(id int) (domain.Animal, error)
+	UpdateAnimal(updateId, newOwnerId int, newName, newType, newNickname string) error
+	GetAnimals() ([]domain.Animal, error)
+	GetNotAdoptedAnimals() ([]domain.Animal, error)
+	GetOwnedAnimals(ownerId int) ([]domain.Animal, error)
+	ChangeAnimalNickname(adoptId int, newNick string) error
 }
 
 type Animal struct {

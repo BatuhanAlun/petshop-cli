@@ -1,11 +1,5 @@
 package domain
 
-type IUser interface {
-	GetID() int
-	GetUsername() string
-	CheckPassword(password string) bool
-}
-
 type User struct {
 	ID        int
 	Username  string
