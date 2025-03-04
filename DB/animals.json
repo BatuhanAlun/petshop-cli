@@ -7,5 +7,32 @@
       "ownerId": 1,
       "type": "balik"
     }
+  },
+  {
+    "Data": {
+      "id": 2,
+      "name": "ahmo",
+      "nickname": "noNickNameGiven",
+      "ownerId": -1,
+      "type": "balo"
+    }
+  },
+  {
+    "Data": {
+      "id": 3,
+      "name": "ahah",
+      "nickname": "noNickNameGiven",
+      "ownerId": -1,
+      "type": "ahah"
+    }
+  },
+  {
+    "Data": {
+      "id": 4,
+      "name": "animal2",
+      "nickname": "noNickNameGiven",
+      "ownerId": -1,
+      "type": "animal2"
+    }
   }
 ]

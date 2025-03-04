@@ -10,7 +10,6 @@ func main() {
 	for {
 		fmt.Println("1. Login")
 		fmt.Println("2. Register")
-		fmt.Println("3. LogOut")
 
 		var choice int
 		fmt.Scanln(&choice)
@@ -36,7 +35,7 @@ func main() {
 					fmt.Println("1. Animal transactions")
 					fmt.Println("2. Customer transactions")
 					fmt.Println("3. Market transactions")
-					fmt.Println("4. Return Upper-Menu")
+					fmt.Println("4. Log Out")
 					var choice int
 					fmt.Scanln(&choice)
 					switch choice {
@@ -296,7 +295,7 @@ func main() {
 							break
 						}
 					case 4:
-						break
+						return
 					}
 				}
 			} else if userSessionRole == "customer" {
@@ -305,7 +304,7 @@ func main() {
 					fmt.Println("1. Animal Page")
 					fmt.Println("2. Market Page")
 					fmt.Println("3. Add Money Page")
-					fmt.Println("4. Return Upper-Menu")
+					fmt.Println("4. Log Out")
 					var choice int
 					fmt.Scanln(&choice)
 					switch choice {
@@ -475,9 +474,13 @@ func main() {
 						if err != nil {
 							fmt.Println(err)
 						}
-						service.AddLog(userSessionId, userSessionRole, "Added Money")
+						err = service.AddLog(userSessionId, userSessionRole, "Added Money")
+						if err != nil {
+							fmt.Println(err)
+							return
+						}
 					case 4:
-						break
+						return
 					}
 				}
 			} else {
@@ -497,8 +500,6 @@ func main() {
 			if err != nil {
 				fmt.Println(err)
 			}
-		case 3:
-			return
 		}
 	}
 }

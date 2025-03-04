@@ -11,10 +11,19 @@
   {
     "Data": {
       "id": 1,
-      "money": 999734,
+      "money": 999767,
       "password": "$argon2id$v=19$m=65536,t=1,p=16$VYwXDEe/i7o1SceUaiHoEA$ulCVJDzA3DYhVy/sGG5WOZ0YTpEG0w8BcIElE/t4Ugc",
       "role": "customer",
       "username": "ahmet"
+    }
+  },
+  {
+    "Data": {
+      "id": 2,
+      "money": 0,
+      "password": "$argon2id$v=19$m=65536,t=1,p=16$cQ9gqRS30BFAYM8xF0Nrxw$oqyRqZ0odrbahOY0kUlsCi4empxxZQFIBGGTRbawRQA",
+      "role": "customer",
+      "username": "sadkl;"
     }
   }
 ]
