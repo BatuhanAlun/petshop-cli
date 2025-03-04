@@ -29,12 +29,14 @@ func main() {
 				fmt.Println(err)
 				return
 			}
+			service.AddLog(userSessionId, userSessionRole, "Logged In")
 			//admin loop
 			if userSessionRole == "admin" {
 				for {
 					fmt.Println("1. Animal transactions")
 					fmt.Println("2. Customer transactions")
 					fmt.Println("3. Market transactions")
+					fmt.Println("4. Return Upper-Menu")
 					var choice int
 					fmt.Scanln(&choice)
 					switch choice {
@@ -45,6 +47,7 @@ func main() {
 						fmt.Println("2. Delete Animal")
 						fmt.Println("3. Update Animal")
 						fmt.Println("4. List  Animals")
+						fmt.Println("5. Return Upper-Menu")
 						var choice int
 						fmt.Scanln(&choice)
 						switch choice {
@@ -60,6 +63,7 @@ func main() {
 							if err != nil {
 								fmt.Println(err)
 							}
+							service.AddLog(userSessionId, userSessionRole, "Added Animal")
 
 						case 2:
 							var deleteId int
@@ -72,7 +76,7 @@ func main() {
 							} else {
 								fmt.Println("Succesfully deleted")
 							}
-
+							service.AddLog(userSessionId, userSessionRole, "Deleted Animal")
 						case 3:
 							var updateId, newOwnerId int
 							var newName, newType, newNickname string
@@ -107,7 +111,7 @@ func main() {
 								}
 								fmt.Println(animal)
 							}
-
+							service.AddLog(userSessionId, userSessionRole, "Updated Animal")
 						case 4:
 							fmt.Println("--==--==--List Animal--==--==--")
 							animalList, err := service.GetAnimals()
@@ -118,6 +122,9 @@ func main() {
 								fmt.Printf("%d. Animal Info : %v\n", index, animalList[index])
 								fmt.Println("-------------------------------")
 							}
+							service.AddLog(userSessionId, userSessionRole, "Listed Animals")
+						case 5:
+							break
 						}
 					case 2:
 						//User Transactions
@@ -126,6 +133,7 @@ func main() {
 						fmt.Println("2. Delete Customer")
 						fmt.Println("3. Update Customer")
 						fmt.Println("4. List  Customer")
+						fmt.Println("5. Return Upper-Menu")
 						var choice int
 						fmt.Scanln(&choice)
 						switch choice {
@@ -141,6 +149,7 @@ func main() {
 							if err != nil {
 								fmt.Println(err)
 							}
+							service.AddLog(userSessionId, userSessionRole, "Added New Customer")
 						case 2:
 							var deleteId int
 							fmt.Println("--==--==--Delete Customer--==--==--")
@@ -152,6 +161,7 @@ func main() {
 							} else {
 								fmt.Println("Succesfully deleted")
 							}
+							service.AddLog(userSessionId, userSessionRole, "Deleted Customer")
 
 						case 3:
 							var updateId, newMoney int
@@ -185,6 +195,7 @@ func main() {
 								}
 								fmt.Println(animal)
 							}
+							service.AddLog(userSessionId, userSessionRole, "Updated Customer")
 						case 4:
 							fmt.Println("--==--==--List Users--==--==--")
 							userList, err := service.GetUsers()
@@ -195,6 +206,9 @@ func main() {
 								fmt.Printf("%d. User Info : %v\n", index, userList[index])
 								fmt.Println("-------------------------------")
 							}
+							service.AddLog(userSessionId, userSessionRole, "Listed Users")
+						case 5:
+							break
 
 						}
 					case 3:
@@ -204,6 +218,7 @@ func main() {
 						fmt.Println("2. Delete Item")
 						fmt.Println("3. Update Item")
 						fmt.Println("4. List  Item")
+						fmt.Println("5. Return Upper-Menu")
 						var choice int
 						fmt.Scanln(&choice)
 						switch choice {
@@ -219,6 +234,7 @@ func main() {
 							if err != nil {
 								fmt.Println(err)
 							}
+							service.AddLog(userSessionId, userSessionRole, "Added New Item")
 
 						case 2:
 							var deleteId int
@@ -231,6 +247,7 @@ func main() {
 							} else {
 								fmt.Println("Succesfully deleted")
 							}
+							service.AddLog(userSessionId, userSessionRole, "Deleted Item")
 
 						case 3:
 							var updateId, newCost int
@@ -262,6 +279,7 @@ func main() {
 								}
 								fmt.Println(animal)
 							}
+							service.AddLog(userSessionId, userSessionRole, "Updated Item")
 
 						case 4:
 							fmt.Println("--==--==--List Items--==--==--")
@@ -273,10 +291,12 @@ func main() {
 								fmt.Printf("%d. Item Info : %v\n", index, itemList[index])
 								fmt.Println("-------------------------------")
 							}
+							service.AddLog(userSessionId, userSessionRole, "Listed Items")
 						case 5:
 							break
 						}
-
+					case 4:
+						break
 					}
 				}
 			} else if userSessionRole == "customer" {
@@ -285,6 +305,7 @@ func main() {
 					fmt.Println("1. Animal Page")
 					fmt.Println("2. Market Page")
 					fmt.Println("3. Add Money Page")
+					fmt.Println("4. Return Upper-Menu")
 					var choice int
 					fmt.Scanln(&choice)
 					switch choice {
@@ -320,6 +341,7 @@ func main() {
 								fmt.Println(err)
 							}
 							fmt.Println("Succesfull")
+							service.AddLog(userSessionId, userSessionRole, "Adopted Animal")
 						case 2:
 							var adoptId int
 							var newNick string
@@ -344,8 +366,8 @@ func main() {
 							if err != nil {
 								fmt.Println(err)
 							}
-
 							fmt.Println("Succesfull")
+							service.AddLog(userSessionId, userSessionRole, "Gived Nickname to Animal")
 
 						case 3:
 							fmt.Println("--==--==--Your Animals--==--==--")
@@ -361,6 +383,7 @@ func main() {
 								fmt.Printf("%d. Animal Info : %v\n", index, animalList[index])
 								fmt.Println("-------------------------------")
 							}
+							service.AddLog(userSessionId, userSessionRole, "Listed Owned Animals")
 						case 4:
 							fmt.Println("--==--==--All Animals--==--==--")
 							animalList, err := service.GetAnimals()
@@ -371,6 +394,7 @@ func main() {
 								fmt.Printf("%d. Animal Info : %v\n", index, animalList[index])
 								fmt.Println("-------------------------------")
 							}
+							service.AddLog(userSessionId, userSessionRole, "Listed All Animals")
 
 						case 5:
 							break
@@ -381,6 +405,7 @@ func main() {
 						fmt.Println("1. Buy Item")
 						fmt.Println("2. Check Inventory")
 						fmt.Println("3. List Items")
+						fmt.Println("4. Return Upper-Menu")
 						var choice int
 						fmt.Scanln(&choice)
 						switch choice {
@@ -402,6 +427,7 @@ func main() {
 							if err != nil {
 								fmt.Println(err)
 							}
+							service.AddLog(userSessionId, userSessionRole, "Buyed Item")
 						case 2:
 							fmt.Println("--==--==--Check Inventory--==--==--")
 							var recordPrintList []string
@@ -425,6 +451,7 @@ func main() {
 								}
 							}
 							fmt.Println(recordPrintList)
+							service.AddLog(userSessionId, userSessionRole, "Checked Inventory")
 						case 3:
 							fmt.Println("--==--==--Item List--==--==--")
 							itemList, err := service.GetItems()
@@ -435,6 +462,7 @@ func main() {
 								fmt.Printf("%d. Item Info : %v\n", index, itemList[index])
 								fmt.Println("-------------------------------")
 							}
+							service.AddLog(userSessionId, userSessionRole, "Listed Items")
 						case 4:
 							break
 						}
@@ -447,6 +475,9 @@ func main() {
 						if err != nil {
 							fmt.Println(err)
 						}
+						service.AddLog(userSessionId, userSessionRole, "Added Money")
+					case 4:
+						break
 					}
 				}
 			} else {
